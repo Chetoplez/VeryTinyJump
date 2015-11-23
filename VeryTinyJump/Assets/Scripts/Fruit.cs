@@ -10,6 +10,7 @@ public class Fruit : MonoBehaviour {
 
     private SpriteRenderer renderer;
     private bool points_gived=false;
+    public bool Points_gived { get { return points_gived; } }
 
     void Start() {
        renderer=GetComponent<SpriteRenderer>();

@@ -55,7 +55,7 @@ public class Player : MonoBehaviour {
                 GameController.camera_behavior.Can_Move = true;
             }
             
-            jump_vector = (Onground)?this.transform.up : Vector3.up;
+            jump_vector = (Onground)?this.transform.up : Vector3.up * 1.5f;
             if (Onground)
             {
                 Change_Gravity(false);

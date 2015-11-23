@@ -77,7 +77,7 @@ public class Planet : MonoBehaviour
         GameController.camera_behavior.Align_Camera_Planet();
         CameraBehavior.Player_Moving = false;
 
-        float advance_size =LevelHandler.Planet_number * 2;
+        float advance_size =LevelHandler.Planet_number;
         GameController.hud.Advance_Progress_Bar_Level(advance_size);
 
         player.transform.parent = this.gameObject.transform;
@@ -88,9 +88,5 @@ public class Planet : MonoBehaviour
         player.Flip(this.transform.position);
     }
 
-    /* ReleasePlayer */
-    void ReleasePlayer() {
-        throw new NotImplementedException();
-    }
 
 }

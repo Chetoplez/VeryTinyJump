@@ -84,6 +84,8 @@ public class CameraBehavior : MonoBehaviour {
 
     /* Calculate the frustum in the game */
     private void Calculate_Frustum(float planet_distance) {
+        /* I must consider even the skin_width, not only the centroid */
+        planet_distance = planet_distance + (Planet_left.transform.localScale.x / 2);
         desired_ortho = (planet_distance * GameController.Main_Camera_Orthografic) / LevelHandler.Max_Planet_Offset;
         
     }

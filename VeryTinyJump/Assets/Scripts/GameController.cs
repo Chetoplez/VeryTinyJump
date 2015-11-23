@@ -9,13 +9,15 @@ public class GameController : MonoBehaviour
         public static string Player_tag = "Player";
         public static string Planet_tag = "Planet";
         public static string Fruit_tag = "Fruit";
-
+        public static string Game_Controller_Tag = "GameController";
     #endregion
 
 
 
     public static int Level_points = 0;  /* Points until we die. If restart, this come back to 0 */
     public static int Global_points = 0; /* Global points, updated when finish the level */
+    public static int Combo_number = 0; /* Number of combos done by the user */
+
 
     private static GameController instance;
     public static GameController Instance { get { return instance ?? new GameController(); } }
@@ -29,6 +31,10 @@ public class GameController : MonoBehaviour
 
     private void Awake() {
         if (Instance != null) GameObject.Destroy(this.gameObject);
+        GameObject other_gameobj = GameObject.FindGameObjectWithTag(GameController.Game_Controller_Tag);
+        if (other_gameobj != null && other_gameobj!=this.gameObject) GameObject.Destroy(this.gameObject);
+
+
         instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
@@ -36,6 +42,7 @@ public class GameController : MonoBehaviour
 
     public static void Reset_Level_Points() {
         Level_points = 0;
+        Combo_number = 0;
     }
 
 

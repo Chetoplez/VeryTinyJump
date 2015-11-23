@@ -35,6 +35,7 @@ public class LevelHandler : MonoBehaviour {
 
     private void Start() {
         Planet_number = myplanet_list.Count;
+        Debug.Log("Number of planets=" + Planet_number);
     }
     
 
