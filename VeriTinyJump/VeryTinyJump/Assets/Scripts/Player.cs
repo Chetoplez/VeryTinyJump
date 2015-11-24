@@ -30,6 +30,14 @@ public class Player : MonoBehaviour {
 
     void Update() {
         Player_Position = this.transform.position;
+
+        if (!Onground)
+        {
+            Vector3 lookatvector = rigidbody.velocity;
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, lookatvector);
+        }
+
+
     }
 
 
@@ -55,7 +63,8 @@ public class Player : MonoBehaviour {
                 GameController.camera_behavior.Can_Move = true;
             }
             
-            jump_vector = (Onground)?this.transform.up : Vector3.up;
+            jump_vector = (Onground)?this.transform.up : Vector3.up*1.2f;
+            jump_vector.x = 0.5f;
             if (Onground)
             {
                 Change_Gravity(false);

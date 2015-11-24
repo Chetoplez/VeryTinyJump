@@ -19,7 +19,7 @@ public class Planet : MonoBehaviour
     private SpriteRenderer renderer;
     public SpriteRenderer Renderer { get { return renderer; } }
     /* Needed for correct positioning in the scene */
-    public Vector3 previous_planet_position = Vector3.zero;
+    public Planet previous_planet = null;
 
 
 
@@ -77,6 +77,9 @@ public class Planet : MonoBehaviour
         GameController.camera_behavior.Align_Camera_Planet();
         CameraBehavior.Player_Moving = false;
 
+        float advance_size = 100/LevelHandler.Planet_number;
+        GameController.hud.Advance_Progress_Bar_Level(advance_size);
+
         player.transform.parent = this.gameObject.transform;
         player_blocked = true;
         player.Change_Gravity(true);
@@ -85,9 +88,5 @@ public class Planet : MonoBehaviour
         player.Flip(this.transform.position);
     }
 
-    /* ReleasePlayer */
-    void ReleasePlayer() {
-        throw new NotImplementedException();
-    }
 
 }

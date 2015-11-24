@@ -33,6 +33,10 @@ public class LevelHandler : MonoBehaviour {
         instance = this;
     }
 
+    private void Start() {
+        Planet_number = myplanet_list.Count;
+        Debug.Log("Number of planets=" + Planet_number);
+    }
     
 
     #region EditorMethods
@@ -50,7 +54,7 @@ public class LevelHandler : MonoBehaviour {
         if (myplanet_list.Count >= 1)
         {
             Debug.Log("Counter=" + (myplanet_list.Count -1));
-            instantiated_planet.previous_planet_position = myplanet_list[myplanet_list.Count - 1].transform.position; 
+            instantiated_planet.previous_planet = myplanet_list[myplanet_list.Count - 1]; 
         }
         instantiated_planet.id = myplanet_list.Count;
         instantiated_planet.name = "Planet_" + myplanet_list.Count;
@@ -96,7 +100,7 @@ public class LevelHandler : MonoBehaviour {
 
                   if (i > 1)
                   {
-                      p.previous_planet_position = temp_list[i - 1].transform.position;
+                      p.previous_planet= temp_list[i - 1];
                       if (!Check_Planet_Distance(p,temp_list[i - 1]))
                        p.transform.position = new Vector3( temp_list[i - 1].transform.position.x + Max_Planet_Offset, p.transform.position.y,0f);
                   }

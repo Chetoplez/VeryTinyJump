@@ -19,8 +19,7 @@ public class CameraBehavior : MonoBehaviour {
     public static bool Player_Moving = false;
     public float Distance_Threshold = 0.2f;  /* Threshold for stop the camera moving */
     private float orthografic_threshold = 0.125f; /* Threshold for stop the camera increasing/decreasing the ortho size */
-
-
+    private float zoom_factor = 0.1f; /* increment or decrement this */
 
 
 
@@ -44,9 +43,8 @@ public class CameraBehavior : MonoBehaviour {
                 {
                     if (adjusting_frustum)
                     {
-                        float middle_ortho = Mathf.Lerp(Camera.main.orthographicSize,desired_ortho,05f);
-                        Camera.main.orthographicSize = (desired_ortho > Camera.main.orthographicSize)?  middle_ortho : -middle_ortho;
 
+                        Camera.main.orthographicSize += (desired_ortho > Camera.main.orthographicSize) ? zoom_factor : -zoom_factor;
                         if (Mathf.Abs(Camera.main.orthographicSize - desired_ortho) < orthografic_threshold)
                         {
                             can_move = false;
@@ -69,7 +67,10 @@ public class CameraBehavior : MonoBehaviour {
     public void Align_Camera_Planet() {
         can_move = LevelHandler.Instance.Get_Next_Center(ref next_center, transform.position);
         if (!can_move)
-            Debug.Log("Align Camera Planet : can move is false!");
+        {
+            Debug.Log("Align Camera Planet : finish!");
+            GameController.Finish_Game();
+        }
         adjusting_frustum = true;
         Adjust_Frustum();
     }
@@ -86,6 +87,8 @@ public class CameraBehavior : MonoBehaviour {
 
     /* Calculate the frustum in the game */
     private void Calculate_Frustum(float planet_distance) {
+        /* I must consider even the skin_width, not only the centroid */
+        planet_distance = planet_distance + (Planet_left.transform.localScale.x / 2);
         desired_ortho = (planet_distance * GameController.Main_Camera_Orthografic) / LevelHandler.Max_Planet_Offset;
         
     }
