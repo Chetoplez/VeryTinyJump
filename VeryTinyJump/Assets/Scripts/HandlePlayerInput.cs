@@ -26,9 +26,10 @@ public class HandlePlayerInput : MonoBehaviour {
             }
         }
 
-        if (!GameController.Tutorial_Showed)
+        if (!GameController.Tutorial_Showed )
         { 
-            GameController.Pause_Game();
+            if(!GameController.Pause)
+                GameController.Pause_Game();
             return;
         }
         
@@ -41,7 +42,7 @@ public class HandlePlayerInput : MonoBehaviour {
 
             if (Jump_input() && can_jump)
             {
-                Main_player.Jump();
+                Main_player.Jump_input = true;
                 jump_counter = Jump_Delay;
                 can_jump = false;
             }

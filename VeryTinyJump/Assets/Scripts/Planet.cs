@@ -80,10 +80,10 @@ public class Planet : MonoBehaviour
 
         float advance_size = (100f/(LevelHandler.Planet_number) ) * (this.id +1);
         GameController.hud.Set_Progress_Bar_Level(advance_size);
-
+        player.Change_Gravity(true);
         player.transform.parent = this.gameObject.transform;
         player_blocked = true;
-        player.Change_Gravity(true);
+        
         player.Already_Jumped = false;
         player.Onground = true;
         player.Flip(this.transform.position);
