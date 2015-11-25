@@ -20,6 +20,7 @@ public class HandlePlayerInput : MonoBehaviour {
         {
             jump_counter -= Time.deltaTime;
             can_jump = (jump_counter <= 0);
+
             if (Jump_input() && can_jump)
             {
                 Main_player.Jump();

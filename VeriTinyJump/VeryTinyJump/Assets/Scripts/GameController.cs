@@ -10,12 +10,12 @@ public class GameController : MonoBehaviour
         public static string Planet_tag = "Planet";
         public static string Fruit_tag = "Fruit";
         public static string Game_Controller_Tag = "GameController";
+
     #endregion
 
 
 
     public static int Level_points = 0;  /* Points until we die. If restart, this come back to 0 */
-    public static int Global_points = 0; /* Global points, updated when finish the level */
     public static int Combo_number = 0; /* Number of combos done by the user */
 
 
@@ -54,6 +54,10 @@ public class GameController : MonoBehaviour
     public static void Pause_Game(bool pause=true){
         GameController.Pause = pause;
         Time.timeScale = (pause) ? 0 : 1;
+    }
+
+    public static void Exit_Game() {
+        Application.Quit();
     }
 
 }

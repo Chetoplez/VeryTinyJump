@@ -28,16 +28,15 @@ public class Player : MonoBehaviour {
         GameController.Alive = true;
 	}
 
-    void Update() {
+    void FixedUpdate() {
         Player_Position = this.transform.position;
 
         if (!Onground)
         {
             Vector3 lookatvector = rigidbody.velocity;
+            lookatvector = Vector3.Lerp(lookatvector,this.transform.up,0.2f);
             transform.rotation = Quaternion.LookRotation(Vector3.forward, lookatvector);
         }
-
-
     }
 
 
@@ -71,7 +70,10 @@ public class Player : MonoBehaviour {
                 Onground = false;
             }
             else
+            { 
                 already_jumped = true;
+                Hud.Alpha_Jump_Button_Changed = true;
+            }
 
             AddForce(jump_vector * jump_speed);
             

@@ -29,33 +29,29 @@ public class CameraBehavior : MonoBehaviour {
     }
 
 
-	void Update () {
+	void LateUpdate () {
         if (can_move)
         {
             if (!Player_Moving)
             {
+                if (adjusting_frustum)
+                {
+                    Camera.main.orthographicSize += ((desired_ortho > Camera.main.orthographicSize) ? zoom_factor : -zoom_factor) * Time.deltaTime * 15;
+                    if (Mathf.Abs(Camera.main.orthographicSize - desired_ortho) < orthografic_threshold)
+                     adjusting_frustum = false;
+                }
+
                 if (Vector3.Distance(this.transform.position, next_center) > Distance_Threshold)
                 {
-                    next_position = Vector3.Lerp(this.transform.position, next_center, 0.5f);
+                    next_position = Vector3.Lerp(this.transform.position, next_center, 0.1f);
                     this.transform.position = next_position;
                 }
                 else
-                {
-                    if (adjusting_frustum)
-                    {
-
-                        Camera.main.orthographicSize += (desired_ortho > Camera.main.orthographicSize) ? zoom_factor : -zoom_factor;
-                        if (Mathf.Abs(Camera.main.orthographicSize - desired_ortho) < orthografic_threshold)
-                        {
-                            can_move = false;
-                            adjusting_frustum = false;
-                        }
-                    }
-                }
+                    can_move = false; 
             }
             else
             {
-                next_position = Vector3.Lerp(this.transform.position, Player.Player_Position, 0.3f);
+                next_position = Vector3.Lerp(this.transform.position, Player.Player_Position, 0.1f);
                 next_position.z = Camera.main.transform.position.z;
                 this.transform.position = next_position;
             }
