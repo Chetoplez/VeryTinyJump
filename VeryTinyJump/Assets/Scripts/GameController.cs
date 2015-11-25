@@ -10,14 +10,14 @@ public class GameController : MonoBehaviour
         public static string Planet_tag = "Planet";
         public static string Fruit_tag = "Fruit";
         public static string Game_Controller_Tag = "GameController";
+
     #endregion
 
 
 
     public static int Level_points = 0;  /* Points until we die. If restart, this come back to 0 */
-    public static int Global_points = 0; /* Global points, updated when finish the level */
     public static int Combo_number = 0; /* Number of combos done by the user */
-
+    public static bool Tutorial_Showed = false; /* Image of tutorial showed */
 
     private static GameController instance;
     public static GameController Instance { get { return instance ?? new GameController(); } }
@@ -45,11 +45,19 @@ public class GameController : MonoBehaviour
         Combo_number = 0;
     }
 
+    public static void Finish_Game() {
+        GameController.Alive = false;
+        Pause_Game();
+    }
 
     public static bool Is_Player(GameObject other) { return other.tag == Player_tag; }
     public static void Pause_Game(bool pause=true){
         GameController.Pause = pause;
         Time.timeScale = (pause) ? 0 : 1;
+    }
+
+    public static void Exit_Game() {
+        Application.Quit();
     }
 
 }

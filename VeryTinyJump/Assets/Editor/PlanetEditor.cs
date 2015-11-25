@@ -10,7 +10,7 @@ public class PlanetEditor : Editor {
  	    DrawDefaultInspector();
 
         Planet planet = target as Planet;
-
+        if (planet == null || planet.previous_planet==null) return;
         if (LevelHandler.Planet_number > 1)
         {
             if (!(Vector3.Distance(planet.transform.position,planet.previous_planet.transform.position)<LevelHandler.Max_Planet_Offset))

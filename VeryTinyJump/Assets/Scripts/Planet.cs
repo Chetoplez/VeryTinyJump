@@ -76,9 +76,10 @@ public class Planet : MonoBehaviour
         LevelHandler.Actual_Planet_Index = this.id;
         GameController.camera_behavior.Align_Camera_Planet();
         CameraBehavior.Player_Moving = false;
+        Hud.Alpha_Jump_Button_Changed = false;
 
-        float advance_size =LevelHandler.Planet_number;
-        GameController.hud.Advance_Progress_Bar_Level(advance_size);
+        float advance_size = (100f/(LevelHandler.Planet_number) ) * (this.id +1);
+        GameController.hud.Set_Progress_Bar_Level(advance_size);
 
         player.transform.parent = this.gameObject.transform;
         player_blocked = true;

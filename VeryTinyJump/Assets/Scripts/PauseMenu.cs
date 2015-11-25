@@ -25,6 +25,13 @@ public class PauseMenu : MonoBehaviour {
         Application.LoadLevel(GameController.Main_Menu_Scene);
         GameController.Pause_Game(false);
     }
-    
+
+    public void Load_Scene() {
+        Application.LoadLevel(level);
+    }
+
+    public void Quit_Game() {
+        GameController.Exit_Game();
+    }
     
 }

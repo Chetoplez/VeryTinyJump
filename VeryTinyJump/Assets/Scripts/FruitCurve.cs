@@ -11,6 +11,7 @@ public class FruitCurve : BezierCurve {
 
     private Player player;
     private bool player_presence = false;
+    private bool combo_gived = false;
 
     void Start(){
         player = HandlePlayerInput.Main_player;
@@ -37,13 +38,11 @@ public class FruitCurve : BezierCurve {
         {
             if (player_presence)
             {
-                if (Fruit_1.Points_gived && Fruit_2.Points_gived && Fruit_3.Points_gived && Fruit_4.Points_gived)
+                if (Fruit_1.Points_gived && Fruit_2.Points_gived && Fruit_3.Points_gived && Fruit_4.Points_gived && !combo_gived)
                 {
                     GameController.Combo_number++;
-                    Debug.Log("Combo!");
+                    combo_gived = true; 
                 }
-                else
-                    Debug.Log("Not a combo!"); 
                 
             }
         }

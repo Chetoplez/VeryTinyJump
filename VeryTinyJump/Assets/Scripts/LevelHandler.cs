@@ -35,7 +35,6 @@ public class LevelHandler : MonoBehaviour {
 
     private void Start() {
         Planet_number = myplanet_list.Count;
-        Debug.Log("Number of planets=" + Planet_number);
     }
     
 
@@ -140,7 +139,7 @@ public class LevelHandler : MonoBehaviour {
         /* If we ended the planet list we finish */
         if (Actual_Planet_Index == (myplanet_list.Count )) return false;
 
-        Debug.Log("Actual planet index=" + Actual_Planet_Index);
+        //Debug.Log("Actual planet index=" + Actual_Planet_Index);
         CameraBehavior.Planet_left = myplanet_list[Actual_Planet_Index];
         CameraBehavior.Planet_right = (Actual_Planet_Index +1 < myplanet_list.Count )?myplanet_list[Actual_Planet_Index + 1] : null;
 
